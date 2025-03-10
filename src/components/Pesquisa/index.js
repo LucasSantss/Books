@@ -1,0 +1,65 @@
+import Input from "../Input"
+import styled from "styled-components"
+import { useState } from "react"
+import { livros } from "./dadosPesquisa"
+
+const PesquisaContainer = styled.section`
+        background-image: linear-gradient( #002F52 35%, #326589 165%);
+        color: #FFF;
+        text-align: center;
+        
+`
+const Titulo = styled.h2`
+        background-image: linear-gradient(180deg, #002F52 35%, #326589);
+        padding-bottom: 5px;
+        color: #FFF;
+        font-size: 36px;
+        text-align: center;
+        width: 100%;
+        margin: 0px;
+`
+const Subtitulo = styled.h3`
+        font-size: 16px;
+        font-weight: 500;
+`
+const Resultado = styled.div`
+    display: inline-table;
+    margin: 15px;
+    cursor: pointer;
+    p {
+        width: 200px;
+    }
+    img {
+        width: 180px;
+    }
+    &:hover {
+        border: 1px solid white;
+    }
+`
+
+function Pesquisa() {
+    const [livrosPesquisados, setLivrosPesquisados] = useState([])
+
+    return (
+        <PesquisaContainer>
+            <Titulo>Já sabe por onde começar?
+                <Subtitulo>Encontre seu liveo em nossa estante.</Subtitulo>
+                <Input placeholder="Escreva sua próxima leitura"
+                    onChange={evento => {
+                        const textoDigitado = evento.target.value
+                        const resultadoPesquisa = livros.filter(livro => livro.nome.includes(textoDigitado))
+                        setLivrosPesquisados(resultadoPesquisa)
+                    }} />
+            </Titulo>
+            {livrosPesquisados.map(livro => (
+                <Resultado>
+                    <img src={livro.src} />
+                    <p>{livro.nome}</p>
+                </Resultado>
+            ))}
+
+        </PesquisaContainer>
+    )
+}
+
+export default Pesquisa
