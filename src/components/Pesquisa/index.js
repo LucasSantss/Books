@@ -71,6 +71,7 @@ function Pesquisa() {
                 <Resultado onClick={() => insereFavorito(livro.id)}>
                     <img src={livroImg} />
                     <p>{livro.nome}</p>
+                    <p>{livro.genero}</p>
                 </Resultado>
             ))}
 
